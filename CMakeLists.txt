@@ -90,7 +90,23 @@ endif()
 
 # Create include/${PACKAGE_NAME} link in the build directory for generated headers.
 file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/include)
-file(CREATE_LINK ../lib ${PROJECT_BINARY_DIR}/include/${PACKAGE_NAME} SYMBOLIC)
+if(WIN32)
+    # Windows: Use junction instead of symlink (symlinks require elevated privileges)
+    set(_link_path "${PROJECT_BINARY_DIR}/include/${PACKAGE_NAME}")
+    if(NOT EXISTS "${_link_path}")
+        # Use junction directly (works without admin)
+        execute_process(
+            COMMAND cmd /c "mklink /J \"${_link_path}\" \"${PROJECT_SOURCE_DIR}\\lib\""
+            RESULT_VARIABLE _link_result
+            ERROR_QUIET
+        )
+        if(NOT _link_result EQUAL 0)
+            message(WARNING "Failed to create junction for ${_link_path}")
+        endif()
+    endif()
+else()
+    file(CREATE_LINK ../lib ${PROJECT_BINARY_DIR}/include/${PACKAGE_NAME} SYMBOLIC)
+endif()
 
 include(${PROJECT_NAME}CompileDefinitions)
 include(${PROJECT_NAME}CompileFeatures)
