@@ -112,15 +112,27 @@ function(${PROJECT_NAME}_ispc_compile_options target)
             
             set(objOut "${CMAKE_CURRENT_BINARY_DIR}/${srcName}.o")
             set(depFile "${CMAKE_CURRENT_BINARY_DIR}/${srcName}.dep")
+            # Set ISPC architecture and target OS based on platform
+            if(APPLE)
+                set(_ispc_arch "aarch64")
+                set(_ispc_target_os "macos")
+            elseif(WIN32)
+                set(_ispc_arch "x86-64")
+                set(_ispc_target_os "windows")
+            else()
+                set(_ispc_arch "x86-64")
+                set(_ispc_target_os "linux")
+            endif()
+
             add_custom_command(
                 OUTPUT ${objOut}
                 COMMAND ${ISPC_COMPILER} ${CMAKE_CURRENT_SOURCE_DIR}/${src}
                     -o ${objOut}
                     -h "./${ISPC_HEADER_DIRECTORY}/${srcName}${ISPC_HEADER_SUFFIX}"
                     -M -MF ${depFile}
-                    --arch=aarch64                      # TODO: hardcoded...
+                    --arch=${_ispc_arch}
                     --target=${ISPC_INSTRUCTION_SETS}
-                    --target-os=macos
+                    --target-os=${_ispc_target_os}
                     ${commonOptions}
                     ${configDepFlags}
                     "-I$<JOIN:$<TARGET_PROPERTY:${target},INCLUDE_DIRECTORIES>,;-I>"

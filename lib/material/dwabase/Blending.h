@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <moonshine/material/dwabase/Blending_ispc_stubs.h>
+#include "Blending_ispc_stubs.h"
 
 #include <moonray/rendering/shading/MaterialApi.h>
 #include <scene_rdl2/scene/rdl2/rdl2.h>

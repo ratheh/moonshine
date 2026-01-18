@@ -76,6 +76,7 @@ target_include_directories(${component}
 target_link_libraries(${component}
     PUBLIC
         Moonray::shading_ispc
+        Moonray::rendering_shading
         SceneRdl2::common_platform
         SceneRdl2::scene_rdl2
 )

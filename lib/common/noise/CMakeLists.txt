@@ -94,6 +94,7 @@ target_include_directories(${component}
 target_link_libraries(${component}
     PUBLIC
         Moonray::shading_ispc
+        Moonray::rendering_shading
         SceneRdl2::common_math
         SceneRdl2::common_platform
         TBB::tbb
