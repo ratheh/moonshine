@@ -28,3 +28,11 @@ cmd/client_apps/Android/bin/
 /.config.xml
 /.metadata_src_project
 /.src_project*
+
+# ==== Windows Build Artifacts ====
+# ISPC-generated stub headers
+*_ispc_stubs.h
+
+# Symlinks/junctions recreated by CMake configure
+# (Tracked as relative symlinks but CMake recreates as absolute)
+include/moonshine
