@@ -33,6 +33,13 @@ cmd/client_apps/Android/bin/
 # ISPC-generated stub headers
 *_ispc_stubs.h
 
-# Symlinks/junctions recreated by CMake configure
-# (Tracked as relative symlinks but CMake recreates as absolute)
-include/moonshine
+# ==== Windows Junction Handling ====
+# The symlink include/moonshine is tracked as a Unix symlink.
+# On Windows, CMake recreates it as a junction pointing to lib/.
+# The symlink shows as "deleted" (expected - content differs).
+# Git traverses the junction and sees lib/ contents as untracked.
+# We must ignore the junction contents to keep git status clean.
+# DO NOT delete this symlink from git - it's needed for Linux/macOS.
+
+# Ignore contents accessed via junction (points to lib/)
+/include/moonshine/*
