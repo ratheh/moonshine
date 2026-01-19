@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <array>
 #include <moonray/rendering/shading/BasicTexture.h>
 #include <scene_rdl2/scene/rdl2/Map.h>
 #include <scene_rdl2/scene/rdl2/AttributeKey.h>

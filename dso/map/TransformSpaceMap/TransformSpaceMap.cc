@@ -7,6 +7,8 @@
 
 #include <moonray/rendering/shading/MapApi.h>
 
+#include <array>
+
 using namespace scene_rdl2::math;
 
 //----------------------------------------------------------------------------

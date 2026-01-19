@@ -12,6 +12,7 @@
 #include <moonray/common/mcrt_macros/moonray_static_check.h>
 #include <moonray/rendering/shading/MapApi.h>
 
+#include <array>
 #include <memory>
 
 using namespace moonshine;
