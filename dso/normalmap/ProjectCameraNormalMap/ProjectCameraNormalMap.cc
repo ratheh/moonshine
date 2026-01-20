@@ -13,6 +13,7 @@
 #include <moonray/rendering/shading/BasicTexture.h>
 #include <moonray/rendering/shading/MapApi.h>
 
+#include <array>   // Required for std::array (MSVC)
 #include <memory>
 
 using namespace moonshine;
