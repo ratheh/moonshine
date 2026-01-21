@@ -59,6 +59,16 @@ function(${PROJECT_NAME}_cxx_compile_options target)
                 -pthread
                 -restrict
         )
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        target_compile_options(${target}
+            PRIVATE
+                /arch:AVX2                      # Specify the name of the target architecture
+                /Zc:__cplusplus                 # Make sure the preprocessor is defined to check for C++ version
+                # Performance optimization flags
+                /Oi                             # Generate intrinsic functions
+                /Ot                             # Favor fast code over small code
+                /GS-                            # Disable buffer security checks (performance critical code)
+        )
     endif()
 endfunction()
 
